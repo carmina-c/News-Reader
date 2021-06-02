@@ -1,10 +1,10 @@
 package com.carminacotiga.newsreader;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.carminacotiga.newsreader.ui.main.MainFragment;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.carminacotiga.newsreader.ui.feature.fragment.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
