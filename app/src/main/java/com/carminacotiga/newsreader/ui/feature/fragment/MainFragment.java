@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.carminacotiga.newsreader.R;
 import com.carminacotiga.newsreader.databinding.NewsListFragmentBinding;
 import com.carminacotiga.newsreader.ui.feature.model.NewsListViewModel;
 import com.carminacotiga.newsreader.ui.feature.model.factory.ViewModelFactory;
@@ -47,6 +49,15 @@ public class MainFragment extends Fragment {
         NewsListFragmentBinding binding = NewsListFragmentBinding.inflate(inflater, container, false);
 
         binding.setViewModel(viewModel);
+
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.news_list_fragment, null);
+        SwipeRefreshLayout swipeRefreshLayout = root.findViewById(R.id.refreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(
+                () -> {
+                    viewModel.refresh();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+        );
 
         return binding.getRoot();
     }

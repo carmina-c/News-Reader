@@ -4,9 +4,9 @@ import androidx.annotation.Nullable;
 
 
 public class ArticleItemViewModel {
-    public final String articleTitle;
-    public final String articleContent;
-    public final String articleImageURL;
+    public String articleTitle;
+    public String articleContent;
+    public String articleImageURL;
     @Nullable
     public Integer id;
 

@@ -12,8 +12,8 @@ public class ArticlesToVMListMapper implements io.reactivex.functions.Function<L
     public List<ArticleItemViewModel> apply(List<Article> articles) {
         List<ArticleItemViewModel> vmItems = new ArrayList<>();
 
-        for (Article dataItem : articles) {
-            ArticleItemViewModel viewModelItem = new ArticleItemViewModel(dataItem.title, dataItem.content, dataItem.imageUrl);
+        for (Article current : articles) {
+            ArticleItemViewModel viewModelItem = new ArticleItemViewModel(current.title, current.content, current.imageUrl);
 
             vmItems.add(viewModelItem);
         }

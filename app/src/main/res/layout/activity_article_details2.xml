@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ArticleDetails">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/detailsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/playfair_display_bold"
+                android:paddingBottom="4dp"
+                android:textSize="24sp"
+                tools:text="TITLU" />
+
+            <TextView
+                android:id="@+id/detailsContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/playfair_display"
+                android:textSize="16sp"
+                tools:text="Continut" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.carminacotiga.newsreader.ui.feature.model.ArticleItemViewModel" />
+    </data>
+</layout>

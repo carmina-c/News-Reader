@@ -3,52 +3,100 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/black"
+        android:clickable="true"
+        android:focusable="true"
+        android:outlineAmbientShadowColor="@color/white"
+        android:outlineSpotShadowColor="@color/white"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
 
-        <ImageView
-            android:id="@+id/news_image"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="16dp"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{viewModel.articleImageURL}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/news_title"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/news_title"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@{viewModel.articleTitle}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="News title" />
+            android:paddingBottom="8dp">
 
-        <TextView
-            android:id="@+id/news_content"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:ellipsize="end"
-            android:singleLine="false"
-            android:text="@{viewModel.articleContent}"
-            app:layout_constraintBottom_toBottomOf="@+id/news_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/news_image"
-            app:layout_constraintTop_toTopOf="@+id/news_image" />
+            <TextView
+                android:id="@+id/news_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/playfair_display_bold"
+                android:paddingBottom="4dp"
+                android:text="@{viewModel.articleTitle}"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="News title" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/news_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/playfair_display"
+                android:singleLine="false"
+                android:text="@{viewModel.articleContent}"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/news_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/news_image"
+                app:layout_constraintTop_toTopOf="@+id/news_image"
+                tools:text="Aici este continutul articolului pe scurt" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/news_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingBottom="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/news_title">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{viewModel.articleImageURL}"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <data>
 
         <variable
             name="viewModel"
             type="com.carminacotiga.newsreader.ui.feature.model.ArticleItemViewModel" />
+
+        <variable
+            name="handler"
+            type="com.carminacotiga.newsreader.ui.feature.listener.ArticleHandler" />
     </data>
 </layout>
