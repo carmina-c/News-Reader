@@ -19,13 +19,13 @@ import com.carminacotiga.newsreader.ui.feature.model.NewsListViewModel;
 import com.carminacotiga.newsreader.ui.feature.model.factory.ViewModelFactory;
 import com.carminacotiga.newsreader.ui.feature.navigator.AlertNavigator;
 
-public class MainFragment extends Fragment {
+public class NewsListFragment extends Fragment {
 
     private NewsListViewModel viewModel;
     private AlertNavigator alertNavigator;
 
-    public static MainFragment newInstance() {
-        return new MainFragment();
+    public static NewsListFragment newInstance() {
+        return new NewsListFragment();
     }
 
     @Override
