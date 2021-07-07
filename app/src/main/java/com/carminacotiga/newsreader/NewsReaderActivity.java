@@ -1,21 +1,24 @@
 package com.carminacotiga.newsreader;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.carminacotiga.newsreader.ui.main.MainFragment;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import com.carminacotiga.newsreader.ui.feature.fragment.NewsListFragment;
+
+public class NewsReaderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.container, NewsListFragment.newInstance())
                     .commitNow();
         }
+
+
     }
 }

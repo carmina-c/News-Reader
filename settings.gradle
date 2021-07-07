@@ -1,2 +1,3 @@
 rootProject.name = "News Reader"
 include ':app'
+include ':data'
