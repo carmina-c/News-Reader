@@ -16,7 +16,7 @@ public class ArticleEntityToArticleMapper implements Function<List<ArticleEntity
     public List<Article> apply(@NotNull List<ArticleEntity> articleEntities) throws Exception {
         List<Article> articleList = new ArrayList<>();
         for (ArticleEntity current : articleEntities) {
-            Article article = new Article(current.getPhoto(), current.getTitle(), current.getContent(), "");
+            Article article = new Article(current.getId(), current.getPhoto(), current.getTitle(), current.getContent(), "");
             articleList.add(article);
         }
         return articleList;

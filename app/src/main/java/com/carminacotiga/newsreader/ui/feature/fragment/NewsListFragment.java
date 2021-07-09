@@ -3,6 +3,7 @@ package com.carminacotiga.newsreader.ui.feature.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import com.carminacotiga.newsreader.ui.feature.model.NewsListViewModel;
 import com.carminacotiga.newsreader.ui.feature.model.factory.ViewModelFactory;
 import com.carminacotiga.newsreader.ui.feature.navigator.AlertNavigator;
 
+import org.jetbrains.annotations.NotNull;
+
 public class NewsListFragment extends Fragment {
 
     private NewsListViewModel viewModel;
@@ -34,7 +37,7 @@ public class NewsListFragment extends Fragment {
 
         alertNavigator = new AlertNavigator(getChildFragmentManager(), requireContext());
 
-        viewModel = new ViewModelProvider(this, new ViewModelFactory(requireActivity().getApplication())).get(NewsListViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity(), new ViewModelFactory(requireActivity().getApplication())).get(NewsListViewModel.class);
 
         viewModel.error.observe(this, throwable -> alertNavigator.showErrorFor(throwable));
         viewModel.openLink.observe(this, this::openLink);
@@ -50,16 +53,23 @@ public class NewsListFragment extends Fragment {
 
         binding.setViewModel(viewModel);
 
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.news_list_fragment, null);
-        SwipeRefreshLayout swipeRefreshLayout = root.findViewById(R.id.refreshLayout);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.refreshLayout);
         swipeRefreshLayout.setOnRefreshListener(
                 () -> {
-                    viewModel.refresh();
-                    swipeRefreshLayout.setRefreshing(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            viewModel.refresh();
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
+                    }, 3000);
                 }
         );
-
-        return binding.getRoot();
     }
 
     private void openLink(@NonNull String link) {

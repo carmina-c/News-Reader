@@ -1,6 +1,7 @@
 package com.carminacotiga.data.features.news.remote.model;
 
 public class ArticleDto {
+    public final int id;
     public final SourceDto source;
     public final String urlToImage;
     public final String url;
@@ -9,7 +10,8 @@ public class ArticleDto {
     public final String title;
     public final String author;
 
-    public ArticleDto(SourceDto source, String urlToImage, String url, String content, String description, String title, String author) {
+    public ArticleDto(int id, SourceDto source, String urlToImage, String url, String content, String description, String title, String author) {
+        this.id = id;
         this.source = source;
         this.urlToImage = urlToImage;
         this.url = url;
