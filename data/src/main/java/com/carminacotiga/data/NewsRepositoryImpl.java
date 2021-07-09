@@ -7,7 +7,10 @@ import com.carminacotiga.data.features.news.remote.NewsRemoteSource;
 import java.util.List;
 
 import io.reactivex.Single;
+import io.reactivex.SingleSource;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class NewsRepositoryImpl implements NewsRepository {
     private final NewsRemoteSource remoteSource;
@@ -22,7 +25,15 @@ public class NewsRepositoryImpl implements NewsRepository {
     @NonNull
     public Single<List<Article>> getNewsArticles() {
         return remoteSource.getNewsArticles()
-                .doOnSuccess(localSource::saveArticles)
+                .flatMap((Function<List<Article>, SingleSource<List<Article>>>) articles ->
+                        localSource.saveArticles(articles)
+                                .andThen(localSource.fetchData()))
                 .onErrorResumeNext(localSource.fetchData());
+    }
+
+    @Override
+    public Single<Article> getArticle(int id) {
+        return localSource.getArticle(id)
+                .subscribeOn(Schedulers.io());
     }
 }

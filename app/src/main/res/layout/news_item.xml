@@ -12,6 +12,7 @@
         android:background="@color/black"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="@{() -> handler.onItemSelected(viewModel)}"
         android:outlineAmbientShadowColor="@color/white"
         android:outlineSpotShadowColor="@color/white"
         app:cardBackgroundColor="@color/black"

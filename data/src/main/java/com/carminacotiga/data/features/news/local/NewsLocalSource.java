@@ -2,6 +2,7 @@ package com.carminacotiga.data.features.news.local;
 
 import com.carminacotiga.data.features.news.local.mapper.ArticleEntityToArticleMapper;
 import com.carminacotiga.data.features.news.local.mapper.ArticleToArticleEntityMapper;
+import com.carminacotiga.data.features.news.local.mapper.OneEntityArticleToArticleMapper;
 import com.carminacotiga.data.features.news.model.Article;
 
 import java.util.List;
@@ -21,6 +22,10 @@ public class NewsLocalSource {
         return dao.queryArticles();
     }
 
+    public Single<Article> getArticle(int id) {
+        return dao.queryArticleItem(id).map(new OneEntityArticleToArticleMapper());
+    }
+
     public Completable insert(ArticleEntity article) {
         return dao.insertArticle(article);
     }
@@ -37,14 +42,13 @@ public class NewsLocalSource {
         }
     }
 
-    public void saveArticles(List<Article> articles) {
+    public Completable saveArticles(List<Article> articles) {
 
-        dao.deleteAllArticles()
+        return dao.deleteAllArticles()
                 .andThen(
                         Single.just(articles)
                                 .map(new ArticleToArticleEntityMapper())
-                                .flatMapCompletable(articleEntities -> dao.insertArticles(articleEntities))
-                ).subscribeOn(Schedulers.io())
-                .subscribe();
+                                .flatMapCompletable(dao::insertArticles)
+                ).subscribeOn(Schedulers.io());
     }
 }

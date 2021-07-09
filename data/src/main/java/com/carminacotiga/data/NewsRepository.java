@@ -11,4 +11,6 @@ import io.reactivex.Single;
 public interface NewsRepository {
     @NonNull
     Single<List<Article>> getNewsArticles();
+
+    Single<Article> getArticle(int id);
 }
